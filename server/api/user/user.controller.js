@@ -1,6 +1,6 @@
 'use strict';
 
-const Thing = require("../../sqldb").Thing;
+const User = require("../../sqldb").User;
 
 function respondWithResult(res, statusCode) {
     statusCode = statusCode || 200;
@@ -40,23 +40,20 @@ function handleError(res, statusCode) {
     };
 }
 
-// Gets a list of Things
 module.exports.index = function index(req, res) {
-    return Thing.findAll()
+    return User.findAll()
         .then(respondWithResult(res))
         .catch(handleError(res));
 };
 
-// Creates a new Thing in the DB
 module.exports.create = function create(req, res) {
-    return Thing.create(req.body)
+    return User.create(req.body)
         .then(respondWithResult(res, 201))
         .catch(handleError(res));
 };
 
-// Deletes a Thing from the DB
 module.exports.destroy = function destroy(req, res) {
-    return Thing.find({
+    return User.find({
         where: {
             _id: req.params.id
         }
